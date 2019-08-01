@@ -46,7 +46,7 @@ data ibm_is_image "ubuntu" {
 #}
 
 data ibm_resource_group "group" {
-  name = "Default"
+  name = "default"
 }
 
 resource ibm_is_instance "vsi1" {
