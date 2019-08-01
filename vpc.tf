@@ -1,4 +1,4 @@
-#variable "ssh_key" {}
+variable "ssh_key" {}
 
 provider "ibm" {
      generation = 1
@@ -6,7 +6,7 @@ provider "ibm" {
 
 locals {
      BASENAME = "nadine" 
-     ZONE     = "us-east-1"
+     ZONE     = "us-south-1"
    }
 
 resource ibm_is_vpc "vpc" {
@@ -37,13 +37,13 @@ resource ibm_is_subnet "subnet1" {
   total_ipv4_address_count = 256
 }
 
-#data ibm_is_image "ubuntu" {
-  #name = "ubuntu-18.04-amd64"
-#}
+data ibm_is_image "ubuntu" {
+  name = "ubuntu-18.04-amd64"
+}
 
-#data ibm_is_ssh_key "ssh_key_id" {
-  #name = "${var.ssh_key}"
-#}
+data ibm_is_ssh_key "ssh_key_id" {
+  name = "${var.ssh_key}"
+}
 
 data ibm_resource_group "group" {
   name = "Default"
@@ -54,10 +54,10 @@ resource ibm_is_instance "vsi1" {
   resource_group = "${data.ibm_resource_group.group.id}"
   vpc     = "${ibm_is_vpc.vpc.id}"
   zone    = "${local.ZONE}"
-  #keys    = ["${data.ibm_is_ssh_key.ssh_key_id.id}"]
-  keys = ["636f6d70-0000-0001-0000-0000001702d4"]
-  #image   = "${data.ibm_is_image.ubuntu.id}"
-  image = "cfdaf1a0-5350-4350-fcbc-97173b510843"
+  keys    = ["${data.ibm_is_ssh_key.ssh_key_id.id}"]
+  #keys = ["636f6d70-0000-0001-0000-0000001702d4"]
+  image   = "${data.ibm_is_image.ubuntu.id}"
+  #image = "cfdaf1a0-5350-4350-fcbc-97173b510843"
   profile = "cc1-2x4"
 
   primary_network_interface = {
