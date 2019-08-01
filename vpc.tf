@@ -37,9 +37,9 @@ resource ibm_is_subnet "subnet1" {
   total_ipv4_address_count = 256
 }
 
-data ibm_is_image "ubuntu" {
-  name = "ubuntu-18.04-amd64"
-}
+#data ibm_is_image "ubuntu" {
+ # name = "ubuntu-18.04-amd64"
+#}
 
 #data ibm_is_ssh_key "ssh_key_id" {
   #name = "${var.ssh_key}"
@@ -56,8 +56,8 @@ resource ibm_is_instance "vsi1" {
   zone    = "${local.ZONE}"
   #keys    = ["${data.ibm_is_ssh_key.ssh_key_id.id}"]
   keys = ["636f6d70-0000-0001-0000-0000001667a5"]
-  image   = "${data.ibm_is_image.ubuntu.id}"
-  #image = "cfdaf1a0-5350-4350-fcbc-97173b510843"
+  #image   = "${data.ibm_is_image.ubuntu.id}"
+  image = "cfdaf1a0-5350-4350-fcbc-97173b510843"
   profile = "cc1-2x4"
 
   primary_network_interface = {
