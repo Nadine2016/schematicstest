@@ -8,7 +8,7 @@ provider "ibm" {
 }
 
 locals {
-     BASENAME = "nadine" 
+     BASENAME = "nadine-schematics" 
      ZONE     = "us-south-1"
    }
 
