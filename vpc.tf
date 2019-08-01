@@ -47,7 +47,8 @@ data ibm_is_ssh_key "ssh_key_id" {
 }
 
 data ibm_resource_group "group" {
-  name = "default"
+#  name = "default"
+     name = "Default"
 }
 
 resource ibm_is_instance "vsi1" {
