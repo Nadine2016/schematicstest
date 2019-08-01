@@ -6,8 +6,8 @@ provider "ibm" {
 }
 
 locals {
-     BASENAME = "nadine-schematics" 
-     ZONE     = "us-south-1"
+     BASENAME = "schematics-fix" 
+     ZONE     = "us-east-1"
    }
 
 resource ibm_is_vpc "vpc" {
