@@ -6,8 +6,8 @@ provider "ibm" {
 }
 
 locals {
-     BASENAME = "schematics-fix" 
-     ZONE     = "us-east-1"
+     BASENAME = "schematics" 
+     ZONE     = "us-south-1"
    }
 
 resource ibm_is_vpc "vpc" {
@@ -48,7 +48,7 @@ data ibm_is_ssh_key "ssh_key_id" {
 
 data ibm_resource_group "group" {
 #  name = "default"
-     name = "Default"
+     name = "default"
 }
 
 resource ibm_is_instance "vsi1" {
