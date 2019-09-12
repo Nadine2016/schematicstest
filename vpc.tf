@@ -3,7 +3,7 @@ variable "ssh_key" {}
 provider "ibm" {
      generation = 1
 #     ibmcloud_api_key = "${var.ibmcloud_api_key}" 
-}
+} 
 
 locals {
      BASENAME = "schematics" 
