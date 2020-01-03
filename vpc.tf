@@ -1,14 +1,14 @@
 variable "ssh_key" {}
+variable "resource_group" {}
 
 provider "ibm" {
-     generation = 1
-#     ibmcloud_api_key = "${var.ibmcloud_api_key}" 
+  generation = 1
 }
 
 locals {
-     BASENAME = "schematics" 
-     ZONE     = "us-south-1"
-   }
+  BASENAME = "schematics" 
+  ZONE     = "eu-de-1"
+}
 
 resource ibm_is_vpc "vpc" {
   name = "${local.BASENAME}-vpc"
@@ -22,7 +22,7 @@ resource ibm_is_security_group "sg1" {
 # allow all incoming network traffic on port 22
 resource "ibm_is_security_group_rule" "ingress_ssh_all" {
   group     = "${ibm_is_security_group.sg1.id}"
-  direction = "ingress"
+  direction = "inbound"
   remote    = "0.0.0.0/0"                       
 
   tcp = {
@@ -39,7 +39,7 @@ resource ibm_is_subnet "subnet1" {
 }
 
 data ibm_is_image "ubuntu" {
- name = "ubuntu-18.04-amd64"
+  name = "ubuntu-18.04-amd64"
 }
 
 data ibm_is_ssh_key "ssh_key_id" {
@@ -47,8 +47,7 @@ data ibm_is_ssh_key "ssh_key_id" {
 }
 
 data ibm_resource_group "group" {
-#  name = "default"
-     name = "default"
+  name = "${var.resource_group}"
 }
 
 resource ibm_is_instance "vsi1" {
@@ -57,9 +56,7 @@ resource ibm_is_instance "vsi1" {
   vpc     = "${ibm_is_vpc.vpc.id}"
   zone    = "${local.ZONE}"
   keys    = ["${data.ibm_is_ssh_key.ssh_key_id.id}"]
-  #keys = ["636f6d70-0000-0001-0000-0000001667a5"]
   image   = "${data.ibm_is_image.ubuntu.id}"
-  #image = "cfdaf1a0-5350-4350-fcbc-97173b510843"
   profile = "cc1-2x4"
 
   primary_network_interface = {
